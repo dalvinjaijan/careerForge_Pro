@@ -3,6 +3,7 @@ import  {connectDb}  from "./config/mongoDb.js"
 import dotenv from 'dotenv'
 import cors from "cors";
 import cookieParser from "cookie-parser"
+import resumeRoute from './routes/resumeRoute.js'
 
 
 dotenv.config()
@@ -16,5 +17,7 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 connectDb()
+
+app.use('/api/resume',resumeRoute)
 
 export default app
