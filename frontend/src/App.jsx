@@ -1,10 +1,21 @@
 import React from 'react'
+import LandingPage from './pages/landingPage'
 
 const App = () => {
   return (
-    <div>
-      <h1>hello</h1>
-    </div>
+    <BrowserRouter>
+
+      <Routes>
+
+        <Route path="/" element={<LandingPage />} />
+
+        {/* <Route path="/login" element={<LoginPage />} />
+
+        <Route path="/signup" element={<SignupPage />} /> */}
+
+      </Routes>
+
+    </BrowserRouter>
   )
 }
 
