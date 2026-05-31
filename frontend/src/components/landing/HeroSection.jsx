@@ -5,7 +5,7 @@ const HeroSection = () => {
       <div>
 
         <p className="bg-indigo-100 text-indigo-700 inline-block px-4 py-2 rounded-full mb-6">
-          AI-Powered Resume Optimizer
+          AI enhanced Resume optimizer
         </p>
 
         <h1 className="text-6xl font-bold leading-tight">
