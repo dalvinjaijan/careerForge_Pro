@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SignupPage = () => {
     return (
-      <div className="h-screen w-full bg-[url(/public/bg_image.jpg)] bg-cover bg-center bg-no-repeat ">
+      <div className="h-screen w-full bg-[url(/bg_image.jpg)] bg-cover bg-center bg-no-repeat ">
         <div className="absolute bg-[#000000b6] w-full h-full grid backdrop-blur-xs">
           <form className=" shadow-2xl place-self-center w-[max(23vw, 330px)] text-[#808080] bg-[white] flex flex-col gap-5 px-10 py-8 rounded-2xl animate-[fadeIn_0.5s] ">
             <div className="flex justify-center items-center text-[#474dff] font-bold text-2xl">

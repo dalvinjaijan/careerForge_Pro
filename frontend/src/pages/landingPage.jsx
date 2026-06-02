@@ -1,6 +1,6 @@
 import Navbar from "../components/landing/Navbar"
 import HeroSection from "../components/landing/HeroSection"
-import HowItWorks from "../components/landing/HeroSection"
+import HowItWorks from "../components/landing/HowItWorks";
 import StatsSection from "../components/landing/StatsSection"
 import TemplateSection from "../components/landing/TemplateSection"
 import PricingSection from "../components/landing/PricingSection"
