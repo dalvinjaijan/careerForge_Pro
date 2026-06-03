@@ -1,21 +1,34 @@
+import PersonalInfoForm from "../components/forms/PersonelInfoForm"
+import EducationForm from "../components/forms/EducationForm"
+import ExperienceForm from "../components/forms/ExperienceForm"
+import SkillsForm from "../components/forms/SkillsForm"
 import ResumePreview from "../components/preview/ResumePreview"
-import PersonalInfoForm from "../components/forms/PersonalInfoForm"
 
-const BuilderPage = () => {
+const ResumeBuilderPage = () => {
 
-    return (
-        <div className="flex h-screen">
+  return (
+    <div className="flex h-screen">
 
-            <div className="w-1/2 overflow-y-scroll p-5 border-r">
-                <PersonalInfoForm />
-            </div>
+      <div className="w-1/2 overflow-y-auto border-r p-8">
 
-            <div className="w-1/2 bg-gray-100 overflow-y-scroll p-5">
-                <ResumePreview />
-            </div>
+        <PersonalInfoForm />
 
-        </div>
-    )
+        <EducationForm />
+
+        <ExperienceForm />
+
+        <SkillsForm />
+
+      </div>
+
+      <div className="w-1/2 bg-gray-100 overflow-y-auto p-8">
+
+        <ResumePreview />
+
+      </div>
+
+    </div>
+  )
 }
 
-export default BuilderPage
+export default ResumeBuilderPage

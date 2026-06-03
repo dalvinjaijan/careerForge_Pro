@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const HeroSection = () => {
   return (
     <section className="grid grid-cols-2 gap-10 px-20 py-20 items-center">
@@ -27,10 +29,11 @@ const HeroSection = () => {
         </p>
 
         <div className="flex gap-5 mt-8">
-
+        <Link to={"/resume-builder"} >
           <button className="bg-indigo-600 text-white px-6 py-3 rounded-xl">
             Get Started Free
           </button>
+          </Link>
 
           <button className="border px-6 py-3 rounded-xl">
             See How It Works
