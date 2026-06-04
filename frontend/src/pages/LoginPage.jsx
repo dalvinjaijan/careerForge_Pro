@@ -1,7 +1,35 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { setCredentials } from "../redux/slices/authSlice";
+import api from '../services/axiosInstance';
+import { useDispatch } from 'react-redux';
 
 const LoginPage = () => {
+
+ const dispatch = useDispatch();
+
+  const login = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response =
+        await api.post("/auth/login", {
+          email,
+          password,
+        });
+
+      dispatch(
+        setCredentials({
+          accessToken:
+            response.data.accessToken,
+          user: response.data.user,
+        })
+      );
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
     return (
       <div className="h-screen w-full bg-[url(/bg_image.jpg)] bg-cover bg-center bg-no-repeat ">
         <div className="absolute bg-[#000000b6] w-full h-full grid backdrop-blur-xs">

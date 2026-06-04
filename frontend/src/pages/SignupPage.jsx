@@ -1,7 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import api from "../services/axiosInstance";
 
 const SignupPage = () => {
+  const signup = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response=await api.post("/auth/signup", {
+      name,
+      email,
+      password,
+    });
+    console.log("response",response)
+
+    navigate("/login");
+
+  } catch (error) {
+    console.log(error);
+  }
+};
     return (
       <div className="h-screen w-full bg-[url(/bg_image.jpg)] bg-cover bg-center bg-no-repeat ">
         <div className="absolute bg-[#000000b6] w-full h-full grid backdrop-blur-xs">
