@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/axiosInstance";
 
 const SignupPage = () => {
+
+    const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
+   
   const signup = async (e) => {
   e.preventDefault();
 
@@ -17,7 +22,7 @@ const SignupPage = () => {
     navigate("/login");
 
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data.message);
   }
 };
     return (
@@ -33,6 +38,7 @@ const SignupPage = () => {
                 name="name"
                 type="text"
                 placeholder="Your name"
+                onChange={(e)=>setName(e.target.value)}
                 required
               />
               <input
@@ -40,6 +46,8 @@ const SignupPage = () => {
                 name="email"
                 type="email"
                 placeholder="Your email"
+                onChange={(e)=>setEmail(e.target.value)}
+
                 required
               />
               <input
@@ -47,12 +55,15 @@ const SignupPage = () => {
                 name="password"
                 type="password"
                 placeholder="Your password"
+                onChange={(e)=>setPassword(e.target.value)}
+
                 required
               />
             </div>
             <button
               className="border-none p-3 rounded text-[white] bg-[#474dff] text-[18px] cursor-pointer"
               type="submit"
+              onClick={signup}
             >
               Create Account
             </button>
