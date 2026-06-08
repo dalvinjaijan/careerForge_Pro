@@ -3,9 +3,10 @@ import EducationForm from "../components/forms/EducationForm"
 import ExperienceForm from "../components/forms/ExperienceForm"
 import SkillsForm from "../components/forms/SkillsForm"
 import ResumePreview from "../components/preview/ResumePreview"
+import { useNavigate } from "react-router-dom"
 
 const ResumeBuilderPage = () => {
-
+const navigate=useNavigate()
   return (
     <div className="flex h-screen">
 
@@ -18,6 +19,12 @@ const ResumeBuilderPage = () => {
         <ExperienceForm />
 
         <SkillsForm />
+        <button
+          onClick={() => navigate("/ats-optimizer")}
+          className="mt-8 bg-indigo-600 text-white px-6 py-3 rounded-lg"
+        >
+          Optimize Resume
+        </button>
 
       </div>
 
@@ -31,4 +38,4 @@ const ResumeBuilderPage = () => {
   )
 }
 
-export default ResumeBuilderPage
+export default ResumeBuilderPage  
