@@ -7,3 +7,4 @@ const port=process.env.PORT ||3001
 app.listen(port, () => {
     console.log(`server is running on ${port}`)
 })
+console.log("groq",process.env.GROQ_API_KEY) 

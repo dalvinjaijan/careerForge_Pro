@@ -5,6 +5,7 @@ import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage'
 import ResumeBuilderPage from './pages/BuilderPage'
 import ProtectedRoute from './components/protectedRoute'
+import ATSOptimizerPage from './pages/ATSOptimizerPage'
 
 const App = () => {
   return (
@@ -19,7 +20,9 @@ const App = () => {
         <Route path="/signup" element={<SignupPage />} />
         <Route element={<ProtectedRoute />} >
         
-        <Route path="/resume-builder" element={<ResumeBuilderPage />}/>
+          <Route path="/resume-builder" element={<ResumeBuilderPage />} />
+        <Route path="/ats-optimizer" element={<ATSOptimizerPage />}/>
+          
         </Route >
       </Routes>
 
