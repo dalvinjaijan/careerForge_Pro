@@ -18,7 +18,7 @@ const LandingPage = () => {
 
       <StatsSection />
 
-      <TemplateSection />
+      {/* <TemplateSection /> */}
 
       <PricingSection />
 

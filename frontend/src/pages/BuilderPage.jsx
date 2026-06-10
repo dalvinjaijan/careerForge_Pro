@@ -23,7 +23,7 @@ const navigate=useNavigate()
           onClick={() => navigate("/ats-optimizer")}
           className="mt-8 bg-indigo-600 text-white px-6 py-3 rounded-lg"
         >
-          Optimize Resume
+          next
         </button>
 
       </div>

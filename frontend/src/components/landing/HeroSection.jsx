@@ -22,7 +22,7 @@ const HeroSection = () => {
 
         <p className="text-gray-600 mt-6 text-lg">
 
-          Upload your resume, paste the job description,
+          Add your personel details, paste the job description,
           and let AI rewrite and optimize your resume
           to match ATS keywords and impress recruiters.
 

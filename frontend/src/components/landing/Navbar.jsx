@@ -11,7 +11,7 @@ const Navbar = () => {
 
         <a href="#pricing">Pricing</a>
 
-        <a href="#templates">Templates</a>
+        {/* <a href="#templates">Templates</a> */}
       </div>
 
       <div className="flex gap-4">

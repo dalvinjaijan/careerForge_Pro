@@ -11,11 +11,11 @@ const HowItWorks = () => {
         <div className="shadow-lg p-8 rounded-2xl">
 
           <h3 className="text-2xl font-semibold mb-4">
-            Upload Resume
+           Add details
           </h3>
 
           <p className="text-gray-600">
-            Upload your existing resume in PDF or DOCX format.
+            Add your personal details, live preview of resume.
           </p>
 
         </div>
