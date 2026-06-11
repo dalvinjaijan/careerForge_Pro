@@ -21,7 +21,8 @@ const App = () => {
         <Route element={<ProtectedRoute />} >
         
           <Route path="/resume-builder" element={<ResumeBuilderPage />} />
-        <Route path="/ats-optimizer" element={<ATSOptimizerPage />}/>
+          <Route path="/ats-optimizer" element={<ATSOptimizerPage />} />
+          <Route path='/upload-resume' element={<UploadResume />} />
           
         </Route >
       </Routes>
