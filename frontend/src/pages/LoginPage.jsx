@@ -6,7 +6,7 @@ const LoginPage = () => {
       <div className="h-screen w-full bg-[url(/bg_image.jpg)] bg-cover bg-center bg-no-repeat ">
         <div className="absolute bg-[#000000b6] w-full h-full grid backdrop-blur-xs">
           <form className=" shadow-2xl place-self-center w-[max(23vw, 330px)] text-[#808080] bg-[white] flex flex-col gap-5 px-10 py-8 rounded-2xl animate-[fadeIn_0.5s] ">
-            <div className="flex justify-center items-center text-[#474dff] font-bold text-2xl">
+            <div className="flex justify-center items-center text-[#0CDBB4] font-bold text-2xl">
               <h2>Log In</h2>
             </div>
             <div className="flex flex-col gap-5">
@@ -26,7 +26,7 @@ const LoginPage = () => {
               />
             </div>
             <button
-              className="border-none p-3 rounded text-[white] bg-[#474dff] text-[18px] cursor-pointer"
+              className="border-none p-3 rounded text-[white] bg-[#0CDBB4] text-[18px] cursor-pointer"
               type="submit"
             >
               Log In
@@ -34,7 +34,7 @@ const LoginPage = () => {
             <p>
               Don't have an account?{" "}
               <Link to="/signup">
-                <span className="text-[#474dff] font-medium cursor-pointer">
+                <span className="text-[#0CDBB4] font-medium cursor-pointer">
                   Create new account
                 </span>
               </Link>

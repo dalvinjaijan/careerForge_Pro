@@ -2,7 +2,7 @@ const StatsSection = () => {
   return (
     <section className="px-20 py-10">
 
-      <div className="bg-indigo-700 text-white rounded-3xl grid grid-cols-4 p-10">
+      <div className="bg-blue-900 text-white rounded-3xl grid grid-cols-4 p-10">
 
         <div>
           <h1 className="text-4xl font-bold">

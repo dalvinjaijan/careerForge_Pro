@@ -1,10 +1,10 @@
-import Navbar from "../components/landing/Navbar"
-import HeroSection from "../components/landing/HeroSection"
-import HowItWorks from "../components/landing/HowItWorks";
-import StatsSection from "../components/landing/StatsSection"
-import TemplateSection from "../components/landing/TemplateSection"
-import PricingSection from "../components/landing/PricingSection"
-import Footer from "../components/landing/Footer"
+import Navbar from "../Components/landing/Navbar"
+import HeroSection from "../Components/landing/HeroSection"
+import HowItWorks from "../Components/landing/HowItWorks"
+import StatsSection from "../Components/landing/StatsSection"
+import TemplateSection from "../Components/landing/TemplateSection"
+import PricingSection from "../Components/landing/PricingSection"
+import Footer from "../Components/landing/Footer"
 
 const LandingPage = () => {
   return (

@@ -1,6 +1,6 @@
 import Resume from "../models/resumeSchema.js"
 
-export const createResume = async (req, res) => {
+export const generateResume = async (req, res) => {
     try {
 
         const resume = await Resume.create(req.body)
