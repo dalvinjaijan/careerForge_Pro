@@ -1,7 +1,41 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { setCredentials } from "../redux/slices/authSlice";
+import api from '../services/axiosInstance';
+import { useDispatch } from 'react-redux';
 
 const LoginPage = () => {
+
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const navigate=useNavigate()
+  
+
+  const login = async (e) => {
+    e.preventDefault();
+    console.log("login clicked")
+
+    try {
+      const response =
+        await api.post("/auth/login", {
+          email,
+          password,
+        });
+
+      dispatch(
+        setCredentials({
+          accessToken:
+            response.data.accessToken,
+          user: response.data.user,
+        })
+      );
+      navigate('/resume-builder')
+
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  }
     return (
       <div className="h-screen w-full bg-[url(/bg_image.jpg)] bg-cover bg-center bg-no-repeat ">
         <div className="absolute bg-[#000000b6] w-full h-full grid backdrop-blur-xs">
@@ -16,6 +50,7 @@ const LoginPage = () => {
                 type="email"
                 placeholder="Your email"
                 required
+                onChange={(e)=>setEmail(e.target.value)}
               />
               <input
                 className="outline-[none] border border-solid border-[#c9c9c9] p-3 rounded"
@@ -23,11 +58,14 @@ const LoginPage = () => {
                 type="password"
                 placeholder="Your password"
                 required
+                onChange={(e)=>setPassword(e.target.value)}
+
               />
             </div>
             <button
               className="border-none p-3 rounded text-[white] bg-[#0CDBB4] text-[18px] cursor-pointer"
               type="submit"
+              onClick={login}
             >
               Log In
             </button>

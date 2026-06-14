@@ -22,7 +22,7 @@ const Navbar = () => {
         >
           Pricing
         </a>
-
+        
         <a
           href="#templates"
           className="relative after:bg-[#0CDBB4] after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer py-0.5"

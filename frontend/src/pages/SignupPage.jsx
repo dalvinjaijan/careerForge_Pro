@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../services/axiosInstance";
 
 const SignupPage = () => {
+
+    const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
+   
+  const signup = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response=await api.post("/auth/signup", {
+      name,
+      email,
+      password,
+    });
+    console.log("response",response)
+
+    navigate("/login");
+
+  } catch (error) {
+    console.log(error.response.data.message);
+  }
+};
     return (
       <div className="h-screen w-full bg-[url(/bg_image.jpg)] bg-cover bg-center bg-no-repeat ">
         <div className="absolute bg-[#000000b6] w-full h-full grid backdrop-blur-xs">
@@ -15,6 +38,7 @@ const SignupPage = () => {
                 name="name"
                 type="text"
                 placeholder="Your name"
+                onChange={(e)=>setName(e.target.value)}
                 required
               />
               <input
@@ -22,6 +46,8 @@ const SignupPage = () => {
                 name="email"
                 type="email"
                 placeholder="Your email"
+                onChange={(e)=>setEmail(e.target.value)}
+
                 required
               />
               <input
@@ -29,12 +55,15 @@ const SignupPage = () => {
                 name="password"
                 type="password"
                 placeholder="Your password"
+                onChange={(e)=>setPassword(e.target.value)}
+
                 required
               />
             </div>
             <button
               className="border-none p-3 rounded text-[white] bg-[#0CDBB4] text-[18px] cursor-pointer"
               type="submit"
+              onClick={signup}
             >
               Create Account
             </button>

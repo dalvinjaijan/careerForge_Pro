@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const HeroSection = () => {
   return (
     <section className="grid grid-cols-2 gap-10 px-20 py-20 items-center mt-20">
@@ -15,11 +17,12 @@ const HeroSection = () => {
           Upload your resume, paste the job description, and let AI rewrite and
           optimize your resume to match ATS keywords and impress recruiters.
         </p>
-
         <div className="flex gap-5 mt-8">
-          <button className="bg-[#0CDBB4] text-white px-6 py-3 rounded-xl hover:bg-[#00b190] cursor-pointer">
-            Get Started Free
-          </button>
+          <Link to={"/resume-builder"}>
+            <button className="bg-[#0CDBB4] hover:bg-[#00bb99] text-white px-6 py-3 rounded-xl">
+              Get Started Free
+            </button>
+          </Link>
 
           <button className="border border-[#0CDBB4] px-6 py-3 rounded-xl hover:bg-[#01cea9] hover:text-white cursor-pointer">
             See How It Works
@@ -28,11 +31,7 @@ const HeroSection = () => {
       </div>
 
       <div className="bg-white p-8">
-        <img
-          src="/section_1.png"
-          alt="resume"
-          className="rounded-2xl"
-        />
+        <img src="/section_1.png" alt="resume" className="rounded-2xl" />
       </div>
     </section>
   );

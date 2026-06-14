@@ -6,6 +6,7 @@ const HowItWorks = () => {
       </h2>
 
       <div className="grid grid-cols-3 gap-10">
+
         <div className="shadow-xl p-8 rounded-2xl border-2 border-[#0CDBB4]">
           <h3 className="text-2xl font-semibold mb-4">Upload Resume</h3>
 

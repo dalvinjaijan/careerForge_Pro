@@ -1,21 +1,41 @@
+import PersonalInfoForm from "../components/forms/PersonelInfoForm"
+import EducationForm from "../components/forms/EducationForm"
+import ExperienceForm from "../components/forms/ExperienceForm"
+import SkillsForm from "../components/forms/SkillsForm"
 import ResumePreview from "../components/preview/ResumePreview"
-import PersonalInfoForm from "../components/forms/PersonalInfoForm"
+import { useNavigate } from "react-router-dom"
 
-const BuilderPage = () => {
+const ResumeBuilderPage = () => {
+const navigate=useNavigate()
+  return (
+    <div className="flex h-screen">
 
-    return (
-        <div className="flex h-screen">
+      <div className="w-1/2 overflow-y-auto border-r p-8">
 
-            <div className="w-1/2 overflow-y-scroll p-5 border-r">
-                <PersonalInfoForm />
-            </div>
+        <PersonalInfoForm />
 
-            <div className="w-1/2 bg-gray-100 overflow-y-scroll p-5">
-                <ResumePreview />
-            </div>
+        <EducationForm />
 
-        </div>
-    )
+        <ExperienceForm />
+
+        <SkillsForm />
+        <button
+          onClick={() => navigate("/ats-optimizer")}
+          className="mt-8 bg-indigo-600 text-white px-6 py-3 rounded-lg"
+        >
+          next
+        </button>
+
+      </div>
+
+      <div className="w-1/2 bg-gray-100 overflow-y-auto p-8">
+
+        <ResumePreview />
+
+      </div>
+
+    </div>
+  )
 }
 
-export default BuilderPage
+export default ResumeBuilderPage  
