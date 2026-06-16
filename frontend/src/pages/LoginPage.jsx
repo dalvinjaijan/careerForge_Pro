@@ -30,7 +30,7 @@ const LoginPage = () => {
           user: response.data.user,
         })
       );
-      navigate('/resume-builder')
+      navigate('/get-started')
 
     } catch (error) {
       console.log(error.response.data.message);

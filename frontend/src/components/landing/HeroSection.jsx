@@ -18,7 +18,7 @@ const HeroSection = () => {
           optimize your resume to match ATS keywords and impress recruiters.
         </p>
         <div className="flex gap-5 mt-8">
-          <Link to={"/resume-builder"}>
+          <Link to={"/get-started"}>
             <button className="bg-[#0CDBB4] hover:bg-[#00bb99] text-white px-6 py-3 rounded-xl">
               Get Started Free
             </button>

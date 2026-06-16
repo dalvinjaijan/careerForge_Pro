@@ -7,6 +7,7 @@ import ResumeBuilderPage from './pages/BuilderPage'
 import ProtectedRoute from './components/protectedRoute'
 import ATSOptimizerPage from './pages/ATSOptimizerPage'
 import UploadResume from './pages/UploadResume'
+import GetStarted from './pages/GetStarted'
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
 
         <Route path="/signup" element={<SignupPage />} />
         <Route element={<ProtectedRoute />} >
+        <Route path="/get-started" element={<GetStarted />} />
         
           <Route path="/resume-builder" element={<ResumeBuilderPage />} />
           <Route path="/ats-optimizer" element={<ATSOptimizerPage />} />
