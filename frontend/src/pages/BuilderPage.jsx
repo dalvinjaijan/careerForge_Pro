@@ -4,14 +4,15 @@ import ExperienceForm from "../components/forms/ExperienceForm"
 import SkillsForm from "../components/forms/SkillsForm"
 import ResumePreview from "../components/preview/ResumePreview"
 import { useNavigate } from "react-router-dom"
+import Navbar from "../Components/landing/Navbar"
 
 const ResumeBuilderPage = () => {
 const navigate=useNavigate()
   return (
     <div className="flex h-screen">
+      <Navbar />
 
-      <div className="w-1/2 overflow-y-auto border-r p-8">
-
+      <div className="w-1/2 overflow-y-auto border-2 rounded-xl mt-40 mb-20 mx-20 px-10 shadow-2xl p-10 [scrollbar-width:none] [&::-webkit-webkit-scrollbar]:hidden border-[#878787]">
         <PersonalInfoForm />
 
         <EducationForm />
@@ -25,17 +26,13 @@ const navigate=useNavigate()
         >
           next
         </button>
-
       </div>
 
-      <div className="w-1/2 bg-gray-100 overflow-y-auto p-8">
-
+      <div className="w-1/2 bg-gray-100 overflow-y-auto p-8 mt-20 [scrollbar-width:none] [&::-webkit-webkit-scrollbar]:hidden">
         <ResumePreview />
-
       </div>
-
     </div>
-  )
+  );
 }
 
 export default ResumeBuilderPage  

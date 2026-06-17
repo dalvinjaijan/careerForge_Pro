@@ -20,7 +20,7 @@ const ResumePreview = () => {
       </div>
 
       {/* Summary */}
-      <section className="mt-6">
+      <section className="mt-20">
         <h2 className="text-xl font-bold border-b pb-2 uppercase">
           Professional Summary
         </h2>
