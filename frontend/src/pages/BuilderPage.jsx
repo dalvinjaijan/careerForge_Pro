@@ -9,10 +9,10 @@ import Navbar from "../Components/landing/Navbar"
 const ResumeBuilderPage = () => {
 const navigate=useNavigate()
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-[#eafef6]">
       <Navbar />
 
-      <div className="w-1/2 overflow-y-auto border-2 rounded-xl mt-40 mb-20 mx-20 px-10 shadow-2xl p-10 [scrollbar-width:none] [&::-webkit-webkit-scrollbar]:hidden border-[#878787]">
+      <div className="w-1/2 overflow-y-auto rounded-xl mt-40 mb-20 mx-20 px-10 bg-white shadow-2xl p-10 [scrollbar-width:none] [&::-webkit-webkit-scrollbar]:hidden ">
         <PersonalInfoForm />
 
         <EducationForm />
@@ -28,7 +28,7 @@ const navigate=useNavigate()
         </button>
       </div>
 
-      <div className="w-1/2 bg-gray-100 overflow-y-auto p-8 mt-20 [scrollbar-width:none] [&::-webkit-webkit-scrollbar]:hidden">
+      <div className="w-1/2 overflow-y-auto p-8 mt-20 [scrollbar-width:none] [&::-webkit-webkit-scrollbar]:hidden">
         <ResumePreview />
       </div>
     </div>

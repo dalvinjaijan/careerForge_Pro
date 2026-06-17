@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-white flex justify-between items-center px-22 py-5 shadow-xl fixed w-full top-0 left-0">
+    <nav className="bg-white flex justify-between items-center px-22 py-5 shadow-xl fixed w-full top-0 left-0 z-[10]">
       <h1 className="text-3xl font-bold text-blue-900 cursor-pointer">
         CareerForge <span className="text-[#0CDBB4]">Pro</span>{" "}
       </h1>

@@ -6,9 +6,9 @@ const GetStarted = () => {
 
     const navigate=useNavigate()
   return (
-    <>
-    <Navbar />
-      <div className="m-10 mt-30">
+    <div className=" h-screen p-10 pt-30">
+      <Navbar />
+      <div className="">
         <button
           type="button"
           className="flex items-center gap-2.5 border border-gray-500/30 px-4 py-2 text-sm text-gray-800 rounded bg-white hover:text-pink-500/70 hover:bg-pink-500/10 hover:border-pink-500/30 active:scale-95 transition"
@@ -102,7 +102,7 @@ const GetStarted = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

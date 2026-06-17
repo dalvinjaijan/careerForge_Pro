@@ -38,7 +38,7 @@ const HeroSection = () => {
             <img
               src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200"
               alt="user1"
-              className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-2"
+              className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[2]"
             />
             <img
               src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200"

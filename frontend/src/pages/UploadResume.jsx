@@ -1,23 +1,36 @@
 import React from 'react'
+import Navbar from '../Components/landing/Navbar'
+import { IoMdCloudUpload } from "react-icons/io";
 
 const UploadResume = () => {
   return (
     <div>
-      <div>
-   <h1>upload your resume</h1>
-      <input type="file" />
+      <Navbar />
+      <div className="bg-[#eafef6] h-screen w-auto flex justify-center items-center">
+        <div className="h-9/12 w-340 bg-white mt-20 rounded-xl shadow-xl">
+          <h1 className="text-center text-3xl font-semibold text-blue-900 mt-10">
+            Upload Your Resume
+          </h1>
+          <p className="text-gray-500 text-center mt-2">
+            Drag and drop your PDF files or browse to begin
+          </p>
+          <div className="bg-[#cfffed] h-70 w-200 m-auto mt-5 rounded-2xl border-dotted border-4 border-[#2ba377] flex flex-col justify-center items-center gap-3">
+            <IoMdCloudUpload className="text-7xl text-[#19674a] cursor-pointer hover:scale-110 transition hover:text-emerald-900" />
+            <p className="text-xl text-green-950 font-semibold">
+              Drag & Drop PDF Files Here
+            </p>
+            <p>or</p>
+            <button className="bg-emerald-600 text-white px-10 py-2 rounded shadow-xl hover:scale-105 transition hover:bg-emerald-900 cursor-pointer hover:shadow-4xl">
+              BROWSE FILES
+            </button>
+          </div>
+          <p className="text-gray-500 text-center mt-3">
+            Files must be PDF format (.pdf) and under 10MB.
+          </p>
+        </div>
       </div>
-       
-      
-        <div>
-        <h1>paste job description </h1> 
-        <input type="text" className='border-2'/>
-      </div>
-      <button>rewrite resume</button>
     </div>
-
-  
-  )
+  );
 }
 
 export default UploadResume
