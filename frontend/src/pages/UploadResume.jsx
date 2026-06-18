@@ -20,9 +20,9 @@ const UploadResume = () => {
               Drag & Drop PDF Files Here
             </p>
             <p>or</p>
-            <button className="bg-emerald-600 text-white px-10 py-2 rounded shadow-xl hover:scale-105 transition hover:bg-emerald-900 cursor-pointer hover:shadow-4xl">
-              BROWSE FILES
-            </button>
+            <input className="bg-emerald-600 text-white px-10 py-2 rounded shadow-xl hover:scale-105 transition hover:bg-emerald-900 cursor-pointer hover:shadow-4xl"
+           type="file"
+            />
           </div>
           <p className="text-gray-500 text-center mt-3">
             Files must be PDF format (.pdf) and under 10MB.
