@@ -1,8 +1,14 @@
 import React from 'react'
 import Navbar from '../Components/landing/Navbar'
 import { IoMdCloudUpload } from "react-icons/io";
+import { useRef} from "react";
 
 const UploadResume = () => {
+  const fileInputRef = useRef(null);
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
   return (
     <div>
       <Navbar />
@@ -20,9 +26,17 @@ const UploadResume = () => {
               Drag & Drop PDF Files Here
             </p>
             <p>or</p>
-            <input className="bg-emerald-600 text-white px-10 py-2 rounded shadow-xl hover:scale-105 transition hover:bg-emerald-900 cursor-pointer hover:shadow-4xl"
-           type="file"
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="bg-emerald-600 text-white px-10 py-2 rounded shadow-xl hover:scale-105 transition hover:bg-emerald-900 cursor-pointer hover:shadow-4xl hidden "
             />
+            <button
+              className="bg-emerald-600 text-white px-10 py-2 rounded shadow-xl hover:scale-105 transition hover:bg-emerald-900 cursor-pointer hover:shadow-4xl"
+              onClick={handleButtonClick}
+            >
+              BROWSE FILES
+            </button>
           </div>
           <p className="text-gray-500 text-center mt-3">
             Files must be PDF format (.pdf) and under 10MB.

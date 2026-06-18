@@ -21,8 +21,7 @@ const App = () => {
 
         <Route path="/signup" element={<SignupPage />} />
         <Route element={<ProtectedRoute />} >
-        <Route path="/get-started" element={<GetStarted />} />
-        
+          <Route path="/get-started" element={<GetStarted />} />
           <Route path="/resume-builder" element={<ResumeBuilderPage />} />
           <Route path="/ats-optimizer" element={<ATSOptimizerPage />} />
           <Route path='/upload-resume' element={<UploadResume />} />

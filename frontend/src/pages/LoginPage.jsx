@@ -30,6 +30,7 @@ const LoginPage = () => {
           user: response.data.user,
         })
       );
+      localStorage.setItem("token", response.data.accessToken);
       navigate('/get-started')
 
     } catch (error) {
