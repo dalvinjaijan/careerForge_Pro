@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav className="bg-white flex justify-between items-center px-22 py-5 shadow-xl fixed w-full top-0 left-0 z-[10]">
-      <h1 className="text-3xl font-bold text-blue-900 cursor-pointer">
-        CareerForge <span className="text-[#0CDBB4]">Pro</span>{" "}
-      </h1>
+      <Link to="/">
+        <h1 className="text-3xl font-bold text-blue-900 cursor-pointer">
+          CareerForge <span className="text-[#0CDBB4]">Pro</span>{" "}
+        </h1>
+      </Link>
 
       <div className="flex gap-8 text-gray-700">
         <a
@@ -22,7 +24,7 @@ const Navbar = () => {
         >
           Pricing
         </a>
-        
+
         <a
           href="#templates"
           className="relative after:bg-[#0CDBB4] after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300 cursor-pointer py-0.5"
