@@ -1,5 +1,7 @@
 import Resume from "../models/resumeSchema.js"
 import groq from "../config/groq.js"
+import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
+
 
 export const generateResume = async (req, res) => {
     try {
@@ -175,6 +177,35 @@ console.log("optimizedExperience",optimizedExperience)
     res.status(500).json({
       message:
         "Resume rewrite failed"
+    });
+  }
+};
+
+
+export const uploadResume = async (req, res) => {
+  try {
+    const pdf = await pdfjsLib.getDocument({
+      data: req.file.buffer,
+    }).promise;
+
+    let text = "";
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+
+      text += content.items
+        .map((item) => item.str)
+        .join(" ");
+    }
+
+    res.json({
+      extractedText: text,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Failed to parse PDF",
     });
   }
 };
