@@ -30,6 +30,7 @@ const UploadResume = () => {
     response.data.extractedText
       )
       );
+      console.log("response",response.data)
       navigate("/ats-optimizer");
       
     } catch (error) {

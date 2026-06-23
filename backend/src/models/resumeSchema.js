@@ -21,6 +21,25 @@ const experienceSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const resumeContentSchema = new mongoose.Schema(
+  {
+    fullName: String,
+
+    email: String,
+
+    phone: String,
+
+    summary: String,
+
+    skills: [String],
+
+    education: [educationSchema],
+
+    experience: [experienceSchema],
+  },
+  { _id: false }
+);
+
 const resumeSchema = new mongoose.Schema(
   {
     userId: {
@@ -61,9 +80,13 @@ const resumeSchema = new mongoose.Schema(
       default: 0,
     },
 
+     originalResume: {
+      type: resumeContentSchema,
+      required: true,
+    },
+
     optimizedResume: {
-      type: Object,
-      default: null,
+      type: resumeContentSchema,
     },
   },
   {

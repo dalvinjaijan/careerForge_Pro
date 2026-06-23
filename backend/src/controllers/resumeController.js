@@ -209,3 +209,40 @@ export const uploadResume = async (req, res) => {
     });
   }
 };
+
+export const saveResume =
+async (
+  req,
+  res
+) => {
+
+  const resume =
+    await Resume.create({
+
+      userId:
+        req.user.id,
+
+      originalResume:
+        req.body.originalResume,
+
+      optimizedResume:
+        req.body.optimizedResume,
+
+      atsScore:
+        req.body.atsScore,
+
+      jobDescription:
+        req.body.jobDescription
+    });
+
+  await User.findByIdAndUpdate(
+    req.user.id,
+    {
+      $inc: {
+        resumesCreated: 1
+      }
+    }
+  );
+
+  res.json(resume);
+};

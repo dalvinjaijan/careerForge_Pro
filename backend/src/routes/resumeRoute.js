@@ -1,8 +1,9 @@
 import express from "express";
-import { generateResume, uploadResume } from "../controllers/resumeController.js";
+import { generateResume, saveResume, uploadResume } from "../controllers/resumeController.js";
 import resumeRoute from "./resumeRoute.js";
 import { analyzeATS, rewriteResume } from "../controllers/resumeController.js"
 import { upload } from "../middleware/upload.js";
+import { checkResumeLimit } from "../middleware/checkResumeLimit.js";
 
 const router = express.Router();
 
@@ -13,6 +14,12 @@ router.post(
   "/upload",
   upload.single("resume"),
   uploadResume
+);
+
+router.post(
+  "/save",
+  checkResumeLimit,
+  saveResume
 );
 
 
