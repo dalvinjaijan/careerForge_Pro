@@ -1,44 +1,75 @@
 import mongoose from "mongoose";
 
-const educationSchema = new mongoose.Schema(
-  {
-    institute: String,
-    degree: String,
-    startYear: String,
-    endYear: String,
-  },
-  { _id: false }
-);
+const educationSchema =
+  new mongoose.Schema(
+    {
+      institution: String,
+      degree: String,
+      year: String,
+    },
+    { _id: false }
+  );
 
-const experienceSchema = new mongoose.Schema(
-  {
-    company: String,
-    role: String,
-    description: String,
-    startDate: String,
-    endDate: String,
-  },
-  { _id: false }
-);
+const experienceSchema =
+  new mongoose.Schema(
+    {
+      company: String,
 
-const resumeContentSchema = new mongoose.Schema(
-  {
-    fullName: String,
+      position: String,
 
-    email: String,
+      duration: String,
 
-    phone: String,
+      achievements: [String],
+    },
+    { _id: false }
+  );
 
-    summary: String,
+const projectSchema =
+  new mongoose.Schema(
+    {
+      title: String,
 
-    skills: [String],
+      technologies: [String],
 
-    education: [educationSchema],
+      achievements: [String],
+    },
+    { _id: false }
+  );
 
-    experience: [experienceSchema],
-  },
-  { _id: false }
-);
+const resumeContentSchema =
+  new mongoose.Schema(
+    {
+      fullName: String,
+
+      email: String,
+
+      phone: String,
+
+      location: String,
+
+      linkedin: String,
+
+      github: String,
+
+      summary: String,
+
+      skills: [String],
+
+      experience: [
+        experienceSchema,
+      ],
+
+      projects: [
+        projectSchema,
+      ],
+
+      education: [
+        educationSchema,
+      ],
+    },
+    { _id: false }
+  );
+
 
 const resumeSchema = new mongoose.Schema(
   {
@@ -53,22 +84,6 @@ const resumeSchema = new mongoose.Schema(
       default: "Untitled Resume",
     },
 
-    fullName: {
-      type: String,
-      required: true,
-    },
-
-    email: String,
-
-    phone: String,
-
-    summary: String,
-
-    education: [educationSchema],
-
-    experience: [experienceSchema],
-
-    skills: [String],
 
     jobDescription: {
       type: String,

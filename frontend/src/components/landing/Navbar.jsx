@@ -1,7 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+
+  const { user,accessToken} = useSelector((state) => state.auth)
+  const plan = user?.plan
+  console.log(
+  useSelector(state => state)
+);
+  console.log("access",accessToken)
   return (
     <nav className="bg-white flex justify-between items-center px-22 py-5 shadow-xl fixed w-full top-0 left-0 z-[10]">
       <Link to="/">
@@ -34,11 +42,17 @@ const Navbar = () => {
       </div>
 
       <div className="flex gap-4">
-        <Link to="/login">
+{accessToken ?
+          <button className="px-5 py-2 border-red-500 border-2 rounded-xl hover:bg-red-700 hover:text-white cursor-pointer">
+            Logout
+          </button> :
+           <Link to="/login">
           <button className="px-5 py-2 border-[#0CDBB4] border-2 rounded-xl hover:bg-[#01cea9] hover:text-white cursor-pointer">
             Login
           </button>
         </Link>
+        }
+       
 
         <Link to="/signup">
           <button className="bg-[#0CDBB4] text-white px-5 py-2 rounded-lg hover:bg-[#00b190] cursor-pointer">

@@ -4,7 +4,7 @@ import { IoMdCloudUpload } from "react-icons/io";
 
 import api from '../services/axiosInstance';
 import { useDispatch } from 'react-redux';
-import { setResumeText } from '../redux/slices/uploadResumeSlice';
+import { setOriginalResume } from '../redux/slices/uploadResumeSlice';
 import { useNavigate } from 'react-router-dom';
 
 const UploadResume = () => {
@@ -22,24 +22,23 @@ const UploadResume = () => {
   formData.append("resume", file);
 
   const response = await api.post(
-    `${import.meta.env.VITE_BACKEND_API}/resume/upload`,
+    '/resume/upload',
     formData
       );
     dispatch(
-  setResumeText(
-    response.data.extractedText
+  setOriginalResume(
+    response.data.originalResume
       )
       );
-      console.log("response",response.data)
+      console.log("response",response.data.originalResume)
       navigate("/ats-optimizer");
       
     } catch (error) {
-      console.log(error.data.message)
+      console.log(error)
     }
 
  
 
-  console.log(response.data);
 };
 
   return (

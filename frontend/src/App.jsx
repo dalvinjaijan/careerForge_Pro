@@ -8,6 +8,8 @@ import ProtectedRoute from './components/protectedRoute'
 import ATSOptimizerPage from './pages/ATSOptimizerPage'
 import UploadResume from './pages/UploadResume'
 import GetStarted from './pages/GetStarted'
+import ResumePreview from './pages/ResumePreview'
+import ResumePDFPage from './pages/ResumePdfPage'
 
 const App = () => {
   return (
@@ -25,8 +27,17 @@ const App = () => {
           <Route path="/resume-builder" element={<ResumeBuilderPage />} />
           <Route path="/ats-optimizer" element={<ATSOptimizerPage />} />
           <Route path='/upload-resume' element={<UploadResume />} />
+          <Route path='/resume-preview' element={<ResumePreview />} />
+        
+
           
         </Route >
+          <Route
+  path="/resume-pdf/:resumeId"
+  element={
+    <ResumePDFPage />
+  }
+/>
       </Routes>
 
     </BrowserRouter>

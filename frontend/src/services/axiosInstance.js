@@ -1,45 +1,31 @@
 import axios from "axios";
+import { store } from "../redux/store";
 
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND_API}`,
   withCredentials: true,
 });
 
-api.interceptors.response.use(
-  (response) => response,
+// api.interceptors.request.use(
+//   (config) => {
 
-  async (error) => {
-    const originalRequest =
-      error.config;
+//     const token =
+//       store.getState().auth
+//         .accessToken;
 
-    if (
-      error.response.status === 401 &&
-      !originalRequest._retry
-    ) {
-      originalRequest._retry = true;
+//     if (token) {
 
-      const res =
-        await api.get(
-          "/auth/refresh-token"
-        );
+//       config.headers.Authorization =
+//         `Bearer ${token}`;
 
-      const newToken =
-        res.data.accessToken;
+//     }
 
-      store.dispatch(
-        setCredentials({
-          accessToken: newToken,
-        })
-      );
+//     return config;
+//   },
 
-      originalRequest.headers.Authorization =
-        `Bearer ${newToken}`;
+//   (error) =>
+//     Promise.reject(error)
 
-      return api(originalRequest);
-    }
-
-    return Promise.reject(error);
-  }
-);
+// );
 
 export default api;

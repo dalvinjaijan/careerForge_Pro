@@ -1,177 +1,310 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  setATSScore,
+  setOptimizedResume,
+  setJobDescription
+} from "../redux/slices/uploadResumeSlice";
+
+import api from "../services/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 const ATSOptimizerPage = () => {
 
-  const resume =
-    useSelector(
-      state => state.resume
+  const dispatch = useDispatch();
+
+  const {
+    originalResume,
+    optimizedResume,
+    
+  } = useSelector(
+    (state) => state.uploadedResume
     );
+  
+  
 
   const [
     jobDescription,
-    setJobDescription
+    settJobDescription,
   ] = useState("");
 
   const [
     atsResult,
-    setAtsResult
+    setAtsResult,
   ] = useState(null);
 
   const [
-    optimizedExperience,
-    setOptimizedExperience
-  ] = useState("");
+    loading,
+    setLoading,
+  ] = useState(false);
 
   const [
-    loading,
-    setLoading
+    rewriteLoading,
+    setRewriteLoading,
   ] = useState(false);
+  const navigate=useNavigate()
 
   const analyzeATS = async () => {
 
-    setLoading(true);
+    try {
 
-    const response =
-      await fetch(
-        "http://localhost:3000/api/resume/analyze",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-          body: JSON.stringify({
-            resume,
-            jobDescription
-          })
-        }
-      );
+      setLoading(true);
 
-    const data =
-      await response.json();
+      const response =
+        await api.post(
+    `${import.meta.env.VITE_BACKEND_API}/resume/analyze`,
+              {resume:
+                originalResume,
+              jobDescription,
+            },
+          
+        );
+      dispatch(setATSScore(response.data))
 
-    setAtsResult(data);
 
-    setLoading(false);
+
+      setAtsResult(response.data);
+
+    } catch (error) {
+
+      console.log(error);
+
+    } finally {
+
+      setLoading(false);
+
+    }
   };
 
   const rewriteResume = async () => {
 
-    setLoading(true);
+    try {
 
-    const response =
-      await fetch(
-        "http://localhost:3000/api/resume/rewrite",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-          body: JSON.stringify({
-            resume,
-            jobDescription
-          })
-        }
+      setRewriteLoading(true);
+
+      const response =
+        await  api.post(
+    `${import.meta.env.VITE_BACKEND_API}/resume/rewrite`,
+              {resume:
+                originalResume,
+              jobDescription,
+            },
+          
+        );
+
+    
+      console.log("rewritten",response.data.optimizedResume)
+
+      dispatch(
+        setOptimizedResume(
+        response.data.optimizedResume
+        )
       );
+      dispatch(setJobDescription(jobDescription))
+      navigate('/resume-preview')
 
-    const data =
-      await response.json();
+    } catch (error) {
 
-    setOptimizedExperience(
-      data.optimizedExperience
-    );
+      console.log(error);
 
-    setLoading(false);
+    } finally {
+
+      setRewriteLoading(false);
+
+    }
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-10">
+
+    <div className="max-w-7xl mx-auto p-8">
 
       <h1 className="text-3xl font-bold mb-6">
-        ATS Optimizer
+
+        ATS Resume Optimizer
+
       </h1>
 
       <textarea
         rows={12}
         value={jobDescription}
         onChange={(e) =>
-          setJobDescription(
+          settJobDescription(
             e.target.value
           )
         }
-        placeholder="Paste Job Description"
-        className="w-full border p-4 rounded-lg"
+        placeholder="Paste Job Description Here..."
+        className="
+          w-full
+          border
+          rounded-lg
+          p-4
+          focus:outline-none
+        "
       />
 
       <button
         onClick={analyzeATS}
-        className="mt-5 bg-indigo-600 text-white px-6 py-3 rounded-lg"
+        disabled={loading}
+        className="
+          mt-5
+          bg-indigo-600
+          text-white
+          px-6
+          py-3
+          rounded-lg
+        "
       >
-        Analyze ATS
+        {loading
+          ? "Analyzing..."
+          : "Analyze ATS"}
       </button>
-
-      {loading && (
-        <p className="mt-4">
-          Processing...
-        </p>
-      )}
 
       {atsResult && (
 
         <div className="mt-10">
 
-          <h2 className="text-2xl font-bold">
+          <h2
+            className="
+              text-2xl
+              font-bold
+            "
+          >
             ATS Score:
             {" "}
             {atsResult.score}%
           </h2>
 
-          <h3 className="mt-5 font-semibold">
-            Missing Keywords
-          </h3>
+          <div className="mt-6">
 
-          <ul className="list-disc pl-6">
+            <h3
+              className="
+                font-semibold
+                text-green-600
+              "
+            >
+              Matched Keywords
+            </h3>
 
-            {atsResult
-              .missingKeywords
-              .map((keyword,index)=>(
-                <li key={index}>
-                  {keyword}
-                </li>
-            ))}
+            <ul
+              className="
+                list-disc
+                ml-6
+              "
+            >
+              {atsResult
+                .matchedKeywords
+                ?.map(
+                  (
+                    keyword,
+                    index
+                  ) => (
+                    <li
+                      key={index}
+                    >
+                      {keyword}
+                    </li>
+                  )
+                )}
+            </ul>
 
-          </ul>
+          </div>
+
+          <div className="mt-6">
+
+            <h3
+              className="
+                font-semibold
+                text-red-600
+              "
+            >
+              Missing Keywords
+            </h3>
+
+            <ul
+              className="
+                list-disc
+                ml-6
+              "
+            >
+              {atsResult
+                .missingKeywords
+                ?.map(
+                  (
+                    keyword,
+                    index
+                  ) => (
+                    <li
+                      key={index}
+                    >
+                      {keyword}
+                    </li>
+                  )
+                )}
+            </ul>
+
+          </div>
+
+          <div className="mt-6">
+
+            <h3
+              className="
+                font-semibold
+              "
+            >
+              Suggestions
+            </h3>
+
+            <ul
+              className="
+                list-disc
+                ml-6
+              "
+            >
+              {atsResult
+                .suggestions
+                ?.map(
+                  (
+                    suggestion,
+                    index
+                  ) => (
+                    <li
+                      key={index}
+                    >
+                      {suggestion}
+                    </li>
+                  )
+                )}
+            </ul>
+
+          </div>
 
           <button
-            onClick={rewriteResume}
-            className="mt-5 bg-green-600 text-white px-6 py-3 rounded-lg"
+            onClick={
+              rewriteResume
+            }
+            disabled={
+              rewriteLoading
+            }
+            className="
+              mt-8
+              bg-green-600
+              text-white
+              px-6
+              py-3
+              rounded-lg
+            "
           >
-            Rewrite Resume
+            {rewriteLoading
+              ? "Optimizing..."
+              : "Rewrite Resume"}
           </button>
 
         </div>
 
       )}
 
-      {optimizedExperience && (
-
-        <div className="mt-10">
-
-          <h2 className="text-2xl font-bold mb-4">
-            Optimized Experience
-          </h2>
-
-          <div className="border rounded-lg p-5 whitespace-pre-wrap">
-
-            {optimizedExperience}
-
-          </div>
-
-        </div>
-
-      )}
+     
 
     </div>
   );

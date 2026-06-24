@@ -1,13 +1,15 @@
+import User from "../models/userSchema.js";
+
 export const checkResumeLimit =
 async (
   req,
   res,
   next
 ) => {
-
+console.log("userID",req.userId)
   const user =
     await User.findById(
-      req.user.id
+      req.userId
     );
 
   if (
