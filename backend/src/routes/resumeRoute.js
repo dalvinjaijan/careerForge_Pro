@@ -1,5 +1,5 @@
 import express from "express";
-import { generateResume, getResumeById, saveResume, uploadResume } from "../controllers/resumeController.js";
+import { createCheckoutSession, generateResume, getResumeById, saveResume, uploadResume } from "../controllers/resumeController.js";
 import resumeRoute from "./resumeRoute.js";
 import { analyzeATS, rewriteResume } from "../controllers/resumeController.js"
 import { upload } from "../middleware/upload.js";
@@ -32,6 +32,7 @@ router.get(
   "/:resumeId",
   getResumeById
 );
+
 
 
 export default router 

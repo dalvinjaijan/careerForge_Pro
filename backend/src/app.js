@@ -5,6 +5,10 @@ import cors from "cors";
 import cookieParser from "cookie-parser"
 import resumeRoute from './routes/resumeRoute.js'
 import authRoute from './routes/authRoute.js'
+import paymenRoute from './routes/paymentRoute.js'
+import { stripeWebhook } from "./controllers/resumeController.js";
+
+
 
 
 
@@ -16,11 +20,21 @@ app.use(cors({
   origin: "http://localhost:5173",
   credentials: true
 }));
-app.use(express.json())
 app.use(cookieParser())
+app.post(
+  "/api/payment/webhook",
+  express.raw({
+    type: "application/json",
+  }),
+  stripeWebhook
+);
+app.use(express.json())
+
 connectDb()
 
 app.use('/api/resume',resumeRoute)
-app.use('/api/auth',authRoute)
+app.use('/api/auth', authRoute)
+app.use('/api/payment',paymenRoute)
 
-export default app
+
+export default app 

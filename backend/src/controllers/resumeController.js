@@ -2,7 +2,11 @@ import Resume from "../models/resumeSchema.js"
 import groq from "../config/groq.js"
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import User from "../models/userSchema.js";
+import Stripe from "stripe";
 
+const stripe = new Stripe(
+  process.env.STRIPE_SECRET_KEY
+);
 
 export const generateResume = async (req, res) => {
     try {
@@ -430,4 +434,96 @@ export const getResumeById =
       });
 
     }
+};
+
+export const createCheckoutSession =
+  async (req, res) => {
+
+    try {
+
+      const session =
+        await stripe.checkout.sessions.create({
+
+          payment_method_types: [
+            "card",
+          ],
+
+          mode: "payment",
+
+          line_items: [
+            {
+              price_data: {
+                currency: "usd",
+
+                product_data: {
+                  name:
+                    "CareerForge Pro",
+                },
+
+                unit_amount: 999,
+              },
+
+              quantity: 1,
+            },
+          ],
+
+          success_url:
+            `${process.env.FRONTEND_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+
+          cancel_url:
+            `${process.env.FRONTEND_URL}/pricing`,
+        });
+
+      res.json({
+        url: session.url,
+      });
+
+    } catch (error) {
+
+      res.status(500).json({
+        message:
+          error.message,
+      });
+
+    }
+};
+
+export const stripeWebhook =
+  async (req, res) => {
+
+    const sig =
+      req.headers[
+        "stripe-signature"
+      ];
+
+    const event =
+      stripe.webhooks.constructEvent(
+        req.body,
+        sig,
+        process.env
+          .STRIPE_WEBHOOK_SECRET
+      );
+
+    if (
+      event.type ===
+      "checkout.session.completed"
+    ) {
+
+      const session =
+        event.data.object;
+
+      const userId =
+        session.metadata.userId;
+
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          plan: "pro",
+        }
+      );
+    }
+
+    res.json({
+      received: true,
+    });
 };

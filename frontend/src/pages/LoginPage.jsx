@@ -31,6 +31,10 @@ const LoginPage = () => {
         })
       );
       localStorage.setItem("token", response.data.accessToken);
+      localStorage.setItem("user",  JSON.stringify(
+    response.data.user
+  ));
+
       navigate('/get-started')
 
     } catch (error) {

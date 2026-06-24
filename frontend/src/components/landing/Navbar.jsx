@@ -1,6 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import api from '../../services/axiosInstance';
+import { logout } from '../../redux/slices/authSlice';
 
 const Navbar = () => {
 
@@ -8,8 +10,68 @@ const Navbar = () => {
   const plan = user?.plan
   console.log(
   useSelector(state => state)
-);
-  console.log("access",accessToken)
+  );
+  const dispatch=useDispatch()
+  
+  const handleLogout = async () => {
+
+  try {
+    await api.post(
+      "/auth/logout"
+    );
+
+    localStorage.removeItem(
+      "token"
+    );
+    
+    localStorage.removeItem(
+      "user"
+    );
+
+    dispatch(logout());
+
+    alert(
+      "Logged out successfully"
+    );
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert(
+      error.response?.data?.message ||
+      "Logout failed"
+    );
+
+  }
+
+  };
+  const handleUpgrade =
+  async () => {
+
+    try {
+
+      const response =
+        await api.post(
+          "/payment/create-checkout-session"
+        );
+
+      window.location.href =
+        response.data.url;
+
+    } catch (error) {
+
+      alert(
+        "Failed to start payment"
+      );
+
+    }
+
+};
+  console.log("plan",plan)
+  
+  console.log("access", accessToken)
+  
   return (
     <nav className="bg-white flex justify-between items-center px-22 py-5 shadow-xl fixed w-full top-0 left-0 z-[10]">
       <Link to="/">
@@ -43,7 +105,8 @@ const Navbar = () => {
 
       <div className="flex gap-4">
 {accessToken ?
-          <button className="px-5 py-2 border-red-500 border-2 rounded-xl hover:bg-red-700 hover:text-white cursor-pointer">
+          <button className="px-5 py-2 border-red-500 border-2 rounded-xl hover:bg-red-700 hover:text-white cursor-pointer"
+            onClick={handleLogout}>
             Logout
           </button> :
            <Link to="/login">
@@ -54,11 +117,35 @@ const Navbar = () => {
         }
        
 
-        <Link to="/signup">
-          <button className="bg-[#0CDBB4] text-white px-5 py-2 rounded-lg hover:bg-[#00b190] cursor-pointer">
-            Get Started
-          </button>
-        </Link>
+       {
+  !user ? (
+
+    <Link to="/signup">
+      <button className="bg-[#0CDBB4] text-white px-5 py-2 rounded-lg hover:bg-[#00b190]">
+        Get Started
+      </button>
+    </Link>
+
+  ) : plan === "pro" ? (
+
+    <button
+      disabled
+      className="bg-green-600 text-white px-5 py-2 rounded-lg cursor-default"
+    >
+      Pro Version
+    </button>
+
+  ) : (
+
+    <button
+      onClick={handleUpgrade}
+      className="bg-yellow-500 text-white px-5 py-2 rounded-lg hover:bg-yellow-600"
+    >
+      Upgrade to Pro
+    </button>
+
+  )
+}
       </div>
     </nav>
   );
