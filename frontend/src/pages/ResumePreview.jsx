@@ -5,7 +5,7 @@ import Navbar from "../Components/landing/Navbar";
 
 const ResumePreview = ( { pdfMode = false,
 }) => {
-    const { optimizedResume, originalResume, atsScore, jobDescription,resumeId } = useSelector((state) => state.uploadedResume)
+    const { optimizedResume, originalResume, atsScore, jobDescription,resumeId,title } = useSelector((state) => state.uploadedResume)
     const dispatch=useDispatch()
 const saveResume = async () => {
 
@@ -13,7 +13,7 @@ const saveResume = async () => {
 
    const saveResponse= await api.post(
       "/resume/save",
-      {
+      {title,
         originalResume,
 
         optimizedResume,

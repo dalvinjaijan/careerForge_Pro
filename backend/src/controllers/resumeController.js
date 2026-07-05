@@ -180,45 +180,65 @@ Job Description:
 
 ${jobDescription}
 
-Return ONLY valid JSON.
+Return ONLY valid JSON in the following format:
 
 {
-  "fullName": "",
-  "email": "",
-  "phone": "",
-  "location": "",
-  "linkedin": "",
-  "github": "",
+  "title": "",
 
-  "summary": "",
+  "optimizedResume": {
 
-  "skills": [],
+    "fullName": "",
+    "email": "",
+    "phone": "",
+    "location": "",
+    "linkedin": "",
+    "github": "",
 
-  "experience": [
-    {
-      "company": "",
-      "position": "",
-      "duration": "",
-      "achievements": []
-    }
-  ],
+    "summary": "",
 
-  "projects": [
-    {
-      "title": "",
-      "technologies": [],
-      "achievements": []
-    }
-  ],
+    "skills": [],
 
-  "education": [
-    {
-      "institution": "",
-      "degree": "",
-      "year": ""
-    }
-  ]
+    "experience": [
+      {
+        "company": "",
+        "position": "",
+        "duration": "",
+        "achievements": []
+      }
+    ],
+
+    "projects": [
+      {
+        "title": "",
+        "technologies": [],
+        "achievements": []
+      }
+    ],
+
+    "education": [
+      {
+        "institution": "",
+        "degree": "",
+        "year": ""
+      }
+    ]
+  }
 }
+
+The top-level "title" is the title of the entire resume,
+NOT the title of any project.
+
+Examples:
+- MERN Stack Developer Resume
+- React Developer Resume
+- Backend Developer Resume
+- Full Stack Developer Resume
+- Software Engineer Resume
+
+Keep the existing project titles unchanged.
+
+Return ONLY JSON.
+Do not wrap in markdown.
 `;
 
     const response =
@@ -246,11 +266,17 @@ Return ONLY valid JSON.
     .replace(/```/g, "")
     .trim();
 
-    const optimizedResume =
+     const aiResult =
       JSON.parse(cleaned);
+    console.log("ai result",aiResult)
 
     return res.status(200).json({
-      optimizedResume,
+
+      title: aiResult.title,
+
+      optimizedResume:
+        aiResult.optimizedResume,
+
     });
 
   } catch (error) {
@@ -367,6 +393,7 @@ async (
 
         userId:
           req.userId,
+        title:req.body.title,
 
         originalResume:
           req.body.originalResume,
@@ -472,6 +499,9 @@ export const createCheckoutSession =
 
           cancel_url:
             `${process.env.FRONTEND_URL}/pricing`,
+            metadata: {
+    userId: req.userId.toString(),
+  }
         });
 
       res.json({
@@ -514,16 +544,129 @@ export const stripeWebhook =
 
       const userId =
         session.metadata.userId;
+    console.log("session",session)
+    console.log("userID",userId)
+      
 
-      await User.findByIdAndUpdate(
+     const user= await User.findByIdAndUpdate(
         userId,
         {
           plan: "pro",
-        }
+       },
+       { returnDocument: "after" }
       );
+    console.log("user",user)
+
     }
 
     res.json({
       received: true,
     });
+  };
+
+  export const generateCoverLetter = async (
+  req,
+  res
+) => {
+
+  try {
+
+    const resume =
+      await Resume.findOne({
+        _id: req.params.resumeId,
+        userId: req.userId,
+      });
+
+    if (!resume) {
+
+      return res.status(404).json({
+        message: "Resume not found",
+      });
+
+    }
+
+    // Return cached version
+    if (resume.coverLetter) {
+
+      return res.json({
+        coverLetter:
+          resume.coverLetter,
+      });
+
+    }
+
+    const prompt = `
+You are a professional career coach.
+
+Write a modern cover letter using:
+
+Resume:
+
+${JSON.stringify(
+  resume.optimizedResume
+)}
+
+Job Description:
+
+${resume.jobDescription}
+
+Requirements:
+
+- Professional tone
+- ATS friendly
+- Maximum one page
+- Mention relevant skills
+- Mention why the applicant fits
+- No fake information
+- End politely
+
+Return ONLY the cover letter text.
+
+Do not use markdown.
+`;
+
+    const response =
+      await groq.chat.completions.create({
+
+        model:
+          "llama-3.3-70b-versatile",
+
+        temperature: 0.3,
+
+        messages: [
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+
+    });
+
+    const coverLetter =
+      response.choices[0]
+        .message.content
+        .trim();
+
+    resume.coverLetter =
+      coverLetter;
+
+    await resume.save();
+
+    res.json({
+      coverLetter,
+    });
+
+  }
+
+  catch (error) {
+
+    console.log(error);
+
+    res.status(500).json({
+      message:
+        "Failed to generate cover letter",
+    });
+
+  }
+
 };

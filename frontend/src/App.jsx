@@ -10,6 +10,8 @@ import UploadResume from './pages/UploadResume'
 import GetStarted from './pages/GetStarted'
 import ResumePreview from './pages/ResumePreview'
 import ResumePDFPage from './pages/ResumePdfPage'
+import PaymentSuccessPage from './pages/PaymentSuccessfullPage'
+import DashboardPage from './pages/DashboardPage'
 
 const App = () => {
   return (
@@ -29,7 +31,8 @@ const App = () => {
           <Route path='/upload-resume' element={<UploadResume />} />
           <Route path='/resume-preview' element={<ResumePreview />} />
         
-
+          <Route path="/payment-success" element={<PaymentSuccessPage />}/>
+          <Route path="/dashboard" element={<DashboardPage/>}/>
           
         </Route >
           <Route

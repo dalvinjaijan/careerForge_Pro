@@ -47,6 +47,7 @@ const initialState = {
   suggestions: [],
 
   loading: false,
+  title:""
 };
 
 const uploadResumeSlice =
@@ -149,8 +150,40 @@ const uploadResumeSlice =
 
         state.loading =
           false;
+        state.title=""
       },
+      setResumeFromDashboard: (state, action) => {
+
+  const resume = action.payload;
+
+  state.originalResume =
+    resume.originalResume;
+
+  state.optimizedResume =
+    resume.optimizedResume;
+
+  state.atsScore =
+    resume.atsScore;
+
+  state.jobDescription =
+    resume.jobDescription;
+
+  state.resumeId =
+    resume._id;
+    state.title=resume.title
+
+      },
+       setResumeTitle: (
+  state,
+  action
+) => {
+
+  state.title =
+    action.payload;
+
+},
     },
+   
   });
 
 export const {
@@ -166,7 +199,9 @@ export const {
   setLoading,
 
   resetResume,
-  setResumeId
+  setResumeId,
+  setResumeFromDashboard,
+  setResumeTitle
 
 } =
   uploadResumeSlice.actions;

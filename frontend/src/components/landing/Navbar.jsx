@@ -58,6 +58,7 @@ const Navbar = () => {
 
       window.location.href =
         response.data.url;
+      
 
     } catch (error) {
 

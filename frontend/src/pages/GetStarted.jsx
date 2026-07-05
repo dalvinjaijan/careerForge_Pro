@@ -35,7 +35,8 @@ const GetStarted = () => {
           <button
             type="button"
             className="flex items-center gap-2.5 border-2 border-cyan-300 px-20 py-3 text-sm text-gray-800 rounded bg-white hover:text-cyan-500 hover:bg-cyan-500/10 hover:border-cyan-500/30 active:scale-95 transition hover:shadow-xl shadow-cyan-200 hover:scale-105"
-          >
+          
+          onClick={()=>navigate('/dashboard')}>
             <svg
               width="25"
               height="25"

@@ -103,6 +103,10 @@ const resumeSchema = new mongoose.Schema(
     optimizedResume: {
       type: resumeContentSchema,
     },
+    coverLetter: {
+  type: String,
+  default: ""
+}
   },
   {
     timestamps: true,

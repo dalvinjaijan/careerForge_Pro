@@ -33,7 +33,7 @@ export const login = async (req, res) => {
       },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "15m",
+        expiresIn: "1d",
       }
     );
 
@@ -160,4 +160,17 @@ export const logout = async (
     });
 
   }
+};
+
+export const getCurrentUser =
+  async (req, res) => {
+
+    const user =
+      await User.findById(req.userId)
+        .select("-password");
+
+    res.json({
+      user,
+    });
+
 };

@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser"
 import resumeRoute from './routes/resumeRoute.js'
 import authRoute from './routes/authRoute.js'
 import paymenRoute from './routes/paymentRoute.js'
+import dashboardRoute from './routes/dashboardRoute.js'
+
 import { stripeWebhook } from "./controllers/resumeController.js";
 
 
@@ -35,6 +37,9 @@ connectDb()
 app.use('/api/resume',resumeRoute)
 app.use('/api/auth', authRoute)
 app.use('/api/payment',paymenRoute)
-
+app.use(
+  "/api/dashboard",
+  dashboardRoute
+);
 
 export default app 

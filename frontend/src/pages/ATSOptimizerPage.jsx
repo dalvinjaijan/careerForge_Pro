@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setATSScore,
   setOptimizedResume,
-  setJobDescription
+  setJobDescription,
+  setResumeTitle
 } from "../redux/slices/uploadResumeSlice";
 
 import api from "../services/axiosInstance";
@@ -94,7 +95,13 @@ const ATSOptimizerPage = () => {
         );
 
     
-      console.log("rewritten",response.data.optimizedResume)
+      console.log("rewritten", response.data.optimizedResume)
+      dispatch(
+  setResumeTitle(
+    response.data.title
+  )
+);
+
 
       dispatch(
         setOptimizedResume(

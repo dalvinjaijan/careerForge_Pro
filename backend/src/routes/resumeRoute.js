@@ -1,5 +1,5 @@
 import express from "express";
-import { createCheckoutSession, generateResume, getResumeById, saveResume, uploadResume } from "../controllers/resumeController.js";
+import { createCheckoutSession, generateCoverLetter, generateResume, getResumeById, saveResume, uploadResume } from "../controllers/resumeController.js";
 import resumeRoute from "./resumeRoute.js";
 import { analyzeATS, rewriteResume } from "../controllers/resumeController.js"
 import { upload } from "../middleware/upload.js";
@@ -31,6 +31,12 @@ router.get(
 router.get(
   "/:resumeId",
   getResumeById
+);
+
+router.post(
+  "/generate-cover-letter/:resumeId",
+  authMiddleware,
+  generateCoverLetter
 );
 
 
